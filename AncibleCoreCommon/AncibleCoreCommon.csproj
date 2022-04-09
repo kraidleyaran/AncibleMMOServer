@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BF99CD7C-E3D7-4901-AAD8-D0F24A24FFC2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AncibleCoreCommon</RootNamespace>
+    <AssemblyName>AncibleCoreCommon</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MessageBusLib">
+      <HintPath>..\External Libraries\MessageBusLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="MLAPI.Cryptography">
+      <HintPath>..\External Libraries\MLAPI.Cryptography.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telepathy, Version=1.0.341.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Telepathy.1.0.341\lib\net471\Telepathy.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AncibleCrypto.cs" />
+    <Compile Include="AncibleUtils.cs" />
+    <Compile Include="ClientMessages.cs" />
+    <Compile Include="CommonData\Ability\AbilityAlignment.cs" />
+    <Compile Include="CommonData\Ability\AbilityData.cs" />
+    <Compile Include="CommonData\Ability\AbilityUpgradeData.cs" />
+    <Compile Include="CommonData\Ability\ResourceCost.cs" />
+    <Compile Include="CommonData\Ability\ResourceType.cs" />
+    <Compile Include="CommonData\Ability\TargetType.cs" />
+    <Compile Include="CommonData\CharacterClasses\CharacterClassData.cs" />
+    <Compile Include="CommonData\CharacterClasses\ClassLevelUpData.cs" />
+    <Compile Include="CommonData\ChatMessageData.cs" />
+    <Compile Include="CommonData\Client\ClientAbilityInfoData.cs" />
+    <Compile Include="CommonData\Client\ClientCharacterData.cs" />
+    <Compile Include="CommonData\Client\ClientCharacterInfoData.cs" />
+    <Compile Include="CommonData\Client\ClientEquippedItemData.cs" />
+    <Compile Include="CommonData\Client\ClientItemData.cs" />
+    <Compile Include="CommonData\Client\ClientLootItemData.cs" />
+    <Compile Include="CommonData\Client\ClientObjectData.cs" />
+    <Compile Include="CommonData\Client\ClientObjectIconData.cs" />
+    <Compile Include="CommonData\Client\ClientResourceData.cs" />
+    <Compile Include="CommonData\Client\ClientStatusEffectData.cs" />
+    <Compile Include="CommonData\Client\ClientTalentData.cs" />
+    <Compile Include="CommonData\Client\ClientTalentUpgrade.cs" />
+    <Compile Include="CommonData\Client\ObjectIconType.cs" />
+    <Compile Include="CommonData\Combat\CombatGrowthStats.cs" />
+    <Compile Include="CommonData\Combat\CombatSettings.cs" />
+    <Compile Include="CommonData\Combat\CombatStats.cs" />
+    <Compile Include="CommonData\Combat\MonsterCombatStats.cs" />
+    <Compile Include="CommonData\Combat\StatusEffectType.cs" />
+    <Compile Include="CommonData\DataExtensions.cs" />
+    <Compile Include="CommonData\InteractionType.cs" />
+    <Compile Include="CommonData\IntNumberRange.cs" />
+    <Compile Include="CommonData\Items\EquippableSlot.cs" />
+    <Compile Include="CommonData\Items\ItemData.cs" />
+    <Compile Include="CommonData\Items\ItemRarity.cs" />
+    <Compile Include="CommonData\Items\ItemType.cs" />
+    <Compile Include="CommonData\Items\LootItemData.cs" />
+    <Compile Include="CommonData\Items\LootTableData.cs" />
+    <Compile Include="CommonData\Items\ShopItemData.cs" />
+    <Compile Include="CommonData\Maps\MapData.cs" />
+    <Compile Include="CommonData\Maps\MapSpawnData.cs" />
+    <Compile Include="CommonData\Maps\MapTileData.cs" />
+    <Compile Include="CommonData\Maps\ObjectSpawnData.cs" />
+    <Compile Include="CommonData\Maps\TileEvents\TileEventData.cs" />
+    <Compile Include="CommonData\Maps\TileEvents\TileEventType.cs" />
+    <Compile Include="CommonData\Maps\TileEvents\TransferTileEventData.cs" />
+    <Compile Include="CommonData\ObjectTemplateData.cs" />
+    <Compile Include="CommonData\PlayerEvent\AbilityRankUpPlayerEvent.cs" />
+    <Compile Include="CommonData\PlayerEvent\NewAbilityPlayerEvent.cs" />
+    <Compile Include="CommonData\PlayerEvent\PickupItemPlayerEvent.cs" />
+    <Compile Include="CommonData\PlayerEvent\PlayerCheckpointEvent.cs" />
+    <Compile Include="CommonData\PlayerEvent\PlayerEvent.cs" />
+    <Compile Include="CommonData\PlayerEvent\PlayerEventType.cs" />
+    <Compile Include="CommonData\PlayerEvent\PlayerExperienceEvent.cs" />
+    <Compile Include="CommonData\PlayerEvent\PlayerGoldEvent.cs" />
+    <Compile Include="CommonData\PlayerEvent\PlayerUsedItemEvent.cs" />
+    <Compile Include="CommonData\Talents\TalentData.cs" />
+    <Compile Include="CommonData\Talents\TalentRankData.cs" />
+    <Compile Include="CommonData\Traits\AddAbilityTraitData.cs" />
+    <Compile Include="CommonData\Traits\AddResourceTraitData.cs" />
+    <Compile Include="CommonData\Traits\AiAbilityManagerTraitData.cs" />
+    <Compile Include="CommonData\Traits\AiAggroTraitData.cs" />
+    <Compile Include="CommonData\Traits\AiMovementTraitData.cs" />
+    <Compile Include="CommonData\Traits\AiStateTraitData.cs" />
+    <Compile Include="CommonData\Traits\AiWanderingTraitData.cs" />
+    <Compile Include="CommonData\Traits\ApplyCombatStatsTraitData.cs" />
+    <Compile Include="CommonData\Traits\ApplyResourceMaximumTraitData.cs" />
+    <Compile Include="CommonData\Traits\AreaOfEffectTraitData.cs" />
+    <Compile Include="CommonData\Traits\CastingTraitData.cs" />
+    <Compile Include="CommonData\Traits\ChanceToApplyTraitData.cs" />
+    <Compile Include="CommonData\Traits\CheckpointTraitData.cs" />
+    <Compile Include="CommonData\Traits\CombatAlignment.cs" />
+    <Compile Include="CommonData\Traits\CombatAlignmentTraitData.cs" />
+    <Compile Include="CommonData\Traits\DamageTraitData.cs" />
+    <Compile Include="CommonData\Traits\DamageType.cs" />
+    <Compile Include="CommonData\Traits\DestroyObjectTraitData.cs" />
+    <Compile Include="CommonData\Traits\HealerTraitData.cs" />
+    <Compile Include="CommonData\Traits\HealTraitData.cs" />
+    <Compile Include="CommonData\Traits\MapTransferTraitData.cs" />
+    <Compile Include="CommonData\Traits\MonsterCombatStatsTraitData.cs" />
+    <Compile Include="CommonData\Traits\MonsterLootTraitData.cs" />
+    <Compile Include="CommonData\Traits\ObjectSpawnerTraitData.cs" />
+    <Compile Include="CommonData\Traits\ObjectStateTraitData.cs" />
+    <Compile Include="CommonData\Traits\OverTimeTraitData.cs" />
+    <Compile Include="CommonData\Traits\ProjectileTraitData.cs" />
+    <Compile Include="CommonData\Traits\RefreshTimerTraitData.cs" />
+    <Compile Include="CommonData\Traits\RemoveResourceTraitData.cs" />
+    <Compile Include="CommonData\Traits\ShopTraitData.cs" />
+    <Compile Include="CommonData\Traits\SpriteTraitData.cs" />
+    <Compile Include="CommonData\Traits\StatusEffectTraitData.cs" />
+    <Compile Include="CommonData\Traits\TimerTraitData.cs" />
+    <Compile Include="CommonData\Traits\TraitData.cs" />
+    <Compile Include="CommonData\Traits\UpgradeAbilityTraitData.cs" />
+    <Compile Include="CommonData\Traits\VisualFxTraitData.cs" />
+    <Compile Include="CommonData\Traits\WeaponDamageTraitData.cs" />
+    <Compile Include="CommonData\Vector2Data.cs" />
+    <Compile Include="CommonData\Vector2IntData.cs" />
+    <Compile Include="CommonData\WorldEvent\BumpWorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\CancelCastWorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\CastWorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\CustomStatusWorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\DamageEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\HealWorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\LevelUpWorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\ProjectileWorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\ResourceWorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\StatusEffectWorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\VisualFxWorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\WorldEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\WorldEventType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SecureLogin.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"E:\D\Projects\Ancible MMO\copy libraries.bat"</PostBuildEvent>
+  </PropertyGroup>
+</Project>

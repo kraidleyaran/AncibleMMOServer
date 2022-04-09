@@ -1,0 +1,1 @@
+copy /y "E:\D\Projects\Ancible MMO\AncibleCoreCommon\bin\Debug\AncibleCoreCommon.dll" "E:\Projects\Ancible MMO Client\Assets\Resources\External Libraries"
