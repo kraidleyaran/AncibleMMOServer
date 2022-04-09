@@ -16,6 +16,7 @@ using AncibleCoreServer.Services.Maps;
 using AncibleCoreServer.Services.ObjectManager;
 using AncibleCoreServer.Services.Talents;
 using AncibleCoreServer.Services.Traits;
+using AncibleCoreServer.Services.WorldBonuses;
 using MessageBusLib;
 using Newtonsoft.Json;
 using Telepathy;
@@ -100,6 +101,7 @@ namespace AncibleCoreServer
                     new CharacterClassService(settings.CharacterClassPath),
                     new ObjectTemplateService(settings.ObjectTemplatePath),
                     new ObjectManagerService(settings.ObjectSpawnPath),
+                    new WorldBonusService(settings.WorldBonusesPath),
                     new SaveService(3000),
                     new KeyAuthorityService(),
                     new TickService(50)

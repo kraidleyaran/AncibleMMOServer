@@ -12,5 +12,6 @@ namespace AncibleCoreCommon.CommonData.Traits
         public DamageType DamageType;
         public float BonusMultiplier;
         public bool UseWeaponDamage;
+        public string[] Tags = new string[0];
     }
 }

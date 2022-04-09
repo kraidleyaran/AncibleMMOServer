@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using AncibleCoreCommon;
 using AncibleCoreCommon.CommonData.Ability;
-using AncibleCoreCommon.CommonData.Client;
 using AncibleCoreCommon.CommonData.Combat;
 using AncibleCoreCommon.CommonData.PlayerEvent;
 using AncibleCoreServer.Data;

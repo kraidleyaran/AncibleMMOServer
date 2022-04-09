@@ -7,6 +7,7 @@ using AncibleCoreCommon.CommonData.Combat;
 using AncibleCoreCommon.CommonData.Items;
 using AncibleCoreCommon.CommonData.PlayerEvent;
 using AncibleCoreCommon.CommonData.Traits;
+using AncibleCoreCommon.CommonData.WorldBonuses;
 using AncibleCoreServer.Data;
 using AncibleCoreServer.Services.Ability;
 using AncibleCoreServer.Services.Maps;
@@ -657,5 +658,27 @@ namespace AncibleCoreServer
         public string Ability;
         public string Mod;
         public AbilityModType Type;
+    }
+
+    public class AddWorldBonusMessage : EventMessage
+    {
+        public WorldBonusData Bonus;
+    }
+
+    public class RemoveWorldBonusMessage : EventMessage
+    {
+        public WorldBonusData Bonus;
+    }
+
+    public class QueryWorldBonusesMessage : EventMessage
+    {
+        public Action<WorldBonusData[]> DoAfter;
+    }
+
+    public class QueryWorldBonusesByTagsMessage : EventMessage
+    {
+        public string[] Tags;
+        public WorldBonusType Type;
+        public Action<WorldBonusData[]> DoAfter;
     }
 }

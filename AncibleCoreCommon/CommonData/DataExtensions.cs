@@ -12,5 +12,6 @@
         public const string LOOT_TABLE = "lootTable";
         public const string JSON = "json";
         public const string TALENT = "talent";
+        public const string WORLD_BONUS = "worldBonus";
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using AncibleCoreCommon;
 using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Client;
+using AncibleCoreCommon.CommonData.WorldBonuses;
 using AncibleCoreServer.Data;
 using AncibleCoreServer.Services.CharacterClass;
 using AncibleCoreServer.Services.ObjectManager;
@@ -185,6 +186,18 @@ namespace AncibleCoreServer.Services.Traits
             }
         }
 
+        private void SaveBonuses()
+        {
+            var worldBonuses = new WorldBonusData[0];
+            this.SendMessageTo(new QueryWorldBonusesMessage{DoAfter = bonuses => worldBonuses = bonuses}, _parent);
+            var bonusesCollection = _characterDatabase.GetCollection<CharacterWorldBonus>(CharacterWorldBonus.TABLE);
+            bonusesCollection.DeleteAll();
+            for (var i = 0; i < worldBonuses.Length; i++)
+            {
+                bonusesCollection.Insert(new CharacterWorldBonus(worldBonuses[i]));
+            }
+        }
+
         private void SubscribeToMessages()
         {
             this.Subscribe<UpdateClientsTickMessage>(UpdateClientsTick);
@@ -334,6 +347,7 @@ namespace AncibleCoreServer.Services.Traits
             SaveEquipment();
             SaveResources();
             SaveTalents();
+            SaveBonuses();
         }
 
         private void ClientDeathConfirmation(ClientDeathConfirmationMessage msg)

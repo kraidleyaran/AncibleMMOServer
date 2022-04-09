@@ -18,6 +18,7 @@ namespace AncibleCoreServer
         public string ItemPath { get; set; }
         public string LootTablePath { get; set; }
         public string CombatSettingsPath { get; set; }
+        public string WorldBonusesPath { get; set; }
         public string DatabaseSettingsPath { get; set; }
         public string AnalyticsDatabasePath { get; set; }
     }

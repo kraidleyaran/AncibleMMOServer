@@ -1,6 +1,8 @@
-﻿using AncibleCoreCommon.CommonData;
+﻿using AncibleCoreCommon;
+using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Combat;
 using AncibleCoreCommon.CommonData.Traits;
+using AncibleCoreCommon.CommonData.WorldBonuses;
 using AncibleCoreCommon.CommonData.WorldEvent;
 using AncibleCoreServer.Services.Combat;
 using AncibleCoreServer.Services.ObjectManager;
@@ -16,6 +18,7 @@ namespace AncibleCoreServer.Services.Traits
         private DamageType _damageType = DamageType.Magical;
         private bool _applyBonus = false;
         private bool _broadcast = false;
+        private string[] _tags = new string[0];
 
         public HealTrait(TraitData data) : base(data)
         {
@@ -25,6 +28,7 @@ namespace AncibleCoreServer.Services.Traits
                 _damageType = healData.DamageType;
                 _applyBonus = healData.ApplyBonus;
                 _broadcast = healData.Broadcast;
+                _tags = healData.Tags;
             }
         }
 
@@ -50,6 +54,9 @@ namespace AncibleCoreServer.Services.Traits
                         }
                 }, parentObj);
                 amount += bonus;
+                var worldBonuses = new WorldBonusData[0];
+                this.SendMessageTo(new QueryWorldBonusesByTagsMessage{Type = WorldBonusType.Heal, Tags = _tags, DoAfter = bonuses => worldBonuses = bonuses}, parentObj);
+                amount += worldBonuses.GetBonusesTotal();
                 if (_broadcast)
                 {
                     this.SendMessageTo(new BroadcastHealMessage { Amount = amount, Owner = parentObj }, parentObj);

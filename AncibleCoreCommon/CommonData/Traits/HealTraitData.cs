@@ -12,5 +12,6 @@ namespace AncibleCoreCommon.CommonData.Traits
         public DamageType DamageType;
         public bool ApplyBonus;
         public bool Broadcast;
+        public string[] Tags = new string[0];
     }
 }

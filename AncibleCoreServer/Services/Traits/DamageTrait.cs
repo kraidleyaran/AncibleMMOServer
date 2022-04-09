@@ -1,6 +1,8 @@
-﻿using AncibleCoreCommon.CommonData;
+﻿using AncibleCoreCommon;
+using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Combat;
 using AncibleCoreCommon.CommonData.Traits;
+using AncibleCoreCommon.CommonData.WorldBonuses;
 using AncibleCoreCommon.CommonData.WorldEvent;
 using AncibleCoreServer.Services.Combat;
 using AncibleCoreServer.Services.ObjectManager;
@@ -16,6 +18,7 @@ namespace AncibleCoreServer.Services.Traits
         private DamageType _type = DamageType.Physical;
         private float _bonusMultiplier = 1f;
         private bool _useWeaponDamage = false;
+        private string[] _tags = new string[0];
 
         public DamageTrait(TraitData data) : base(data)
         {
@@ -25,6 +28,7 @@ namespace AncibleCoreServer.Services.Traits
                 _type = damageData.DamageType;
                 _bonusMultiplier = damageData.BonusMultiplier;
                 _useWeaponDamage = damageData.UseWeaponDamage;
+                _tags = damageData.Tags;
             }
         }
 
@@ -63,6 +67,9 @@ namespace AncibleCoreServer.Services.Traits
                         ownerStats = baseStats + bonusStats;
                     }}, damageOwner);
                 amount += (int)(CombatService.CalculateBonusDamage(_type, ownerStats) * _bonusMultiplier);
+                var worldBonuses = new WorldBonusData[0];
+                this.SendMessageTo(new QueryWorldBonusesByTagsMessage{Tags = _tags, Type = WorldBonusType.Damage, DoAfter = bonuses => worldBonuses = bonuses}, damageOwner);
+                amount += worldBonuses.GetBonusesTotal();
                 var critAmount = CombatService.CalculateCritDamage(_type, ownerStats, amount);
                 if (critAmount != amount)
                 {

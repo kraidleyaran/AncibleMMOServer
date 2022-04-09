@@ -92,6 +92,10 @@ namespace AncibleCoreServer
                     return new UpgradeAbilityTrait(data);
                 case MapTransferTraitData.TYPE:
                     return new MapTransferTrait(data);
+                case ApplyAbilityModTraitData.TYPE:
+                    return new ApplyAbilityModTrait(data);
+                case ApplyWorldBonusTraitData.TYPE:
+                    return new ApplyWorldBonusTrait(data);
                 default:
                     return new ObjectTrait(data);
             }

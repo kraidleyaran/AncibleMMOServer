@@ -5,6 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Combat;
+using AncibleCoreCommon.CommonData.WorldBonuses;
 using Newtonsoft.Json;
 
 namespace AncibleCoreCommon
@@ -304,6 +305,17 @@ namespace AncibleCoreCommon
                 default:
                     return $"{type}";
             }
+        }
+
+        public static int GetBonusesTotal(this WorldBonusData[] bonuses)
+        {
+            var amount = 0;
+            for (var i = 0; i < bonuses.Length; i++)
+            {
+                amount += bonuses[i].Amount;
+            }
+
+            return amount;
         }
     }
 
