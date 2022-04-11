@@ -21,7 +21,7 @@ namespace AncibleCoreServer.Services.Traits
         public override void Setup(WorldObject owner)
         {
             base.Setup(owner);
-            this.SendMessageWithFilterTo(RefreshTimerMessage.INSTANCE, _parent, _timer);
+            this.SendMessageTo(new RefreshTimerMessage{Timer = _timer} , _parent);
         }
     }
 }

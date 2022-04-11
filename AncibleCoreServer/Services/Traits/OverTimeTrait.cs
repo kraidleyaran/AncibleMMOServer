@@ -76,7 +76,7 @@ namespace AncibleCoreServer.Services.Traits
 
         private void SubscribeToMessages()
         {
-            _parent.SubscribeWithFilter<RefreshTimerMessage>(RefreshTimer, Name);
+            _parent.SubscribeWithFilter<RefreshTimerMessage>(RefreshTimer, _instanceId);
             if (_show)
             {
                 _parent.SubscribeWithFilter<QueryClientIconDataMessage>(QueryClientObjectIcon, _instanceId);
@@ -90,6 +90,7 @@ namespace AncibleCoreServer.Services.Traits
         private void RefreshTimer(RefreshTimerMessage msg)
         {
             _timer?.Reset();
+            _parent.Update = true;
         }
 
         private void TakeDamage(TakeDamageMessage msg)
@@ -112,7 +113,7 @@ namespace AncibleCoreServer.Services.Traits
                 {
                     timerTicks = _timerTicks * _loops;
                 }
-                msg.DoAfter.Invoke(new ClientObjectIconData{Icon = Name, Id = _instanceId, MaxTicks = timerTicks, Ticks = timeLeft, Type = _type});
+                msg.DoAfter.Invoke(new ClientObjectIconData{Icon = Name, Title = _status, Id = _instanceId, MaxTicks = timerTicks, Ticks = timeLeft, Type = _type});
             }
         }
 
@@ -123,7 +124,6 @@ namespace AncibleCoreServer.Services.Traits
                 _timer.Destroy();
                 _timer = null;
             }
-
             _applyOnTimerFinished = null;
             base.Destroy();
 

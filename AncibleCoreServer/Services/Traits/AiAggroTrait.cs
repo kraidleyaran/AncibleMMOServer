@@ -173,6 +173,15 @@ namespace AncibleCoreServer.Services.Traits
                     if (surroundingTiles.Contains(_parent.Tile))
                     {
                         this.SendMessageTo(new SetDirectionMessage { Direction = Vector2IntData.zero }, _parent);
+                        if (target.Tile == _parent.Tile)
+                        {
+                            var availableTiles = surroundingTiles.Where(t => t != target.Tile).OrderBy(t => t.Position.Distance(_parent.Tile.Position)).ToArray();
+                            if (availableTiles.Length > 0)
+                            {
+                                _parent.Tile = availableTiles[0];
+                                _parent.Update = true;
+                            }
+                        }
                     }
                     else if (_pathingThread == null)
                     {

@@ -1,7 +1,9 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace AncibleCoreCommon.CommonData.Client
 {
+    [JsonObject(MemberSerialization.OptOut)]
     [Serializable]
     public class ClientTalentUpgrade
     {

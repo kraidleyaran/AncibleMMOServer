@@ -54,8 +54,8 @@ namespace AncibleCoreServer.Services.Traits
             _parent.SubscribeWithFilter<RemoveAbilityMessage>(RemoveAbility, _instanceId);
             _parent.SubscribeWithFilter<UpdateObjectStateMessage>(UpdateObjectState, _instanceId);
             _parent.SubscribeWithFilter<UpgradeAbilityMessage>(UpgradeAbility, _instanceId);
-            _parent.SubscribeWithFilter<AddAbilityModMessage>(AddAbilityMod, _instanceId);
-            _parent.SubscribeWithFilter<RemoveAbilityModMessage>(RemoveAbilityMod, _instanceId);
+            _parent.SubscribeWithFilter<AddAbilityModsMessage>(AddAbilityMod, _instanceId);
+            _parent.SubscribeWithFilter<RemoveAbilityModsMessage>(RemoveAbilityMod, _instanceId);
         }
 
         private void AddAbility(AddAbilitiyMessage msg)
@@ -259,33 +259,33 @@ namespace AncibleCoreServer.Services.Traits
             }
         }
 
-        private void AddAbilityMod(AddAbilityModMessage msg)
+        private void AddAbilityMod(AddAbilityModsMessage msg)
         {
             if (_abilities.TryGetValue(msg.Ability, out var ability))
             {
                 switch (msg.Type)
                 {
                     case AbilityModType.Target:
-                        ability.TargetMods.Add(msg.Mod);
+                        ability.TargetMods.AddRange(msg.Mods);
                         break;
                     case AbilityModType.Owner:
-                        ability.OwnerMods.Add(msg.Mod);
+                        ability.OwnerMods.AddRange(msg.Mods);
                         break;
                 }
             }
         }
 
-        private void RemoveAbilityMod(RemoveAbilityModMessage msg)
+        private void RemoveAbilityMod(RemoveAbilityModsMessage msg)
         {
             if (_abilities.TryGetValue(msg.Ability, out var ability))
             {
                 switch (msg.Type)
                 {
                     case AbilityModType.Target:
-                        ability.TargetMods.Add(msg.Mod);
+                        ability.TargetMods.AddRange(msg.Mods);
                         break;
                     case AbilityModType.Owner:
-                        ability.OwnerMods.Add(msg.Mod);
+                        ability.OwnerMods.AddRange(msg.Mods);
                         break;
                 }
             }

@@ -81,6 +81,7 @@
     <Compile Include="ClientMessages.cs" />
     <Compile Include="CommonData\Ability\AbilityAlignment.cs" />
     <Compile Include="CommonData\Ability\AbilityData.cs" />
+    <Compile Include="CommonData\Ability\AbilityModType.cs" />
     <Compile Include="CommonData\Ability\AbilityUpgradeData.cs" />
     <Compile Include="CommonData\Ability\ResourceCost.cs" />
     <Compile Include="CommonData\Ability\ResourceType.cs" />
@@ -142,8 +143,10 @@
     <Compile Include="CommonData\Traits\AiMovementTraitData.cs" />
     <Compile Include="CommonData\Traits\AiStateTraitData.cs" />
     <Compile Include="CommonData\Traits\AiWanderingTraitData.cs" />
+    <Compile Include="CommonData\Traits\ApplyAbilityModTraitData.cs" />
     <Compile Include="CommonData\Traits\ApplyCombatStatsTraitData.cs" />
     <Compile Include="CommonData\Traits\ApplyResourceMaximumTraitData.cs" />
+    <Compile Include="CommonData\Traits\ApplyWorldBonusTraitData.cs" />
     <Compile Include="CommonData\Traits\AreaOfEffectTraitData.cs" />
     <Compile Include="CommonData\Traits\CastingTraitData.cs" />
     <Compile Include="CommonData\Traits\ChanceToApplyTraitData.cs" />
@@ -174,6 +177,8 @@
     <Compile Include="CommonData\Traits\WeaponDamageTraitData.cs" />
     <Compile Include="CommonData\Vector2Data.cs" />
     <Compile Include="CommonData\Vector2IntData.cs" />
+    <Compile Include="CommonData\WorldBonuses\WorldBonusData.cs" />
+    <Compile Include="CommonData\WorldBonuses\WorldBonusType.cs" />
     <Compile Include="CommonData\WorldEvent\BumpWorldEvent.cs" />
     <Compile Include="CommonData\WorldEvent\CancelCastWorldEvent.cs" />
     <Compile Include="CommonData\WorldEvent\CastWorldEvent.cs" />

@@ -69,6 +69,7 @@
     <Compile Include="Data\CharacterGrowthStats.cs" />
     <Compile Include="Data\CharacterResource.cs" />
     <Compile Include="Data\CharacterTalent.cs" />
+    <Compile Include="Data\CharacterWorldBonus.cs" />
     <Compile Include="Data\GeneratedKeyData.cs" />
     <Compile Include="Data\WorldCharacter.cs" />
     <Compile Include="Data\WorldCharacterName.cs" />
@@ -118,8 +119,10 @@
     <Compile Include="Services\Traits\AiState.cs" />
     <Compile Include="Services\Traits\AiStateTrait.cs" />
     <Compile Include="Services\Traits\AiWanderingTrait.cs" />
+    <Compile Include="Services\Traits\ApplyAbilityModTrait.cs" />
     <Compile Include="Services\Traits\ApplyCombatStatsTrait.cs" />
     <Compile Include="Services\Traits\ApplyResourceMaximumTrait.cs" />
+    <Compile Include="Services\Traits\ApplyWorldBonusTrait.cs" />
     <Compile Include="Services\Traits\AreaOfEffectTrait.cs" />
     <Compile Include="Services\Traits\CastingTrait.cs" />
     <Compile Include="Services\Traits\ChanceToApplyTrait.cs" />
@@ -141,6 +144,7 @@
     <Compile Include="Services\TickService.cs" />
     <Compile Include="Services\Traits\OverTimeTrait.cs" />
     <Compile Include="Services\Traits\PlayerAbilityManagerTrait.cs" />
+    <Compile Include="Services\Traits\PlayerBonusManagerTrait.cs" />
     <Compile Include="Services\Traits\PlayerClassTrait.cs" />
     <Compile Include="Services\Traits\PlayerCombatStatsTrait.cs" />
     <Compile Include="Services\Traits\PlayerEquipmentTrait.cs" />
@@ -161,6 +165,7 @@
     <Compile Include="Services\Traits\UpgradeAbilityTrait.cs" />
     <Compile Include="Services\Traits\VisualFxTrait.cs" />
     <Compile Include="Services\Traits\WeaponDamageTrait.cs" />
+    <Compile Include="Services\WorldBonuses\WorldBonusService.cs" />
     <Compile Include="StaticErrorStrings.cs" />
     <Compile Include="WorldServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

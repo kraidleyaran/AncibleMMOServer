@@ -10,7 +10,7 @@ namespace AncibleCoreCommon.CommonData.Traits
         public override string Type => TYPE;
 
         public string Ability;
-        public string Mod;
+        public string[] Mods;
         public AbilityModType ModType;
     }
 }

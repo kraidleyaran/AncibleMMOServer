@@ -146,7 +146,7 @@ namespace AncibleCoreServer
 
         public static CharacterAbility ToData(this AbilityData ability)
         {
-            return new CharacterAbility {Name = ability.Name, Rank = 0};
+            return new CharacterAbility {Name = ability.Name, Rank = 0, OwnerMods = new string[0], TargetMods = new string[0]};
         }
 
         public static CombatStats ToStats(this CharacterCombatStats stats)

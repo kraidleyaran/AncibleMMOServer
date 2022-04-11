@@ -59,7 +59,7 @@ namespace AncibleCoreServer.Services.Traits
                 var existing = existingAbilities.FirstOrDefault(e => e.Name == playerAbilties[i].Name);
                 if (existing == null)
                 {
-                    abilityCollection.Insert(new CharacterAbility { Name = playerAbilties[i].Name, Rank = playerAbilties[i].Rank, OwnerMods = new string[0]});
+                    abilityCollection.Insert(new CharacterAbility { Name = playerAbilties[i].Name, Rank = playerAbilties[i].Rank, OwnerMods = playerAbilties[i].OwnerMods, TargetMods = playerAbilties[i].TargetMods});
                 }
                 else
                 {

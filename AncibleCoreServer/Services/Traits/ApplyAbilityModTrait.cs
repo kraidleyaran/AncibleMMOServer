@@ -10,7 +10,7 @@ namespace AncibleCoreServer.Services.Traits
         public override bool Instant => true;
 
         private string _ability = string.Empty;
-        private string _mod = string.Empty;
+        private string[] _mods = new string[0];
         private AbilityModType _type = AbilityModType.Owner;
 
         public ApplyAbilityModTrait(TraitData data) : base(data)
@@ -18,7 +18,7 @@ namespace AncibleCoreServer.Services.Traits
             if (data is ApplyAbilityModTraitData abilityModData)
             {
                 _ability = abilityModData.Ability;
-                _mod = abilityModData.Mod;
+                _mods = abilityModData.Mods;
                 _type = abilityModData.ModType;
             }
         }
@@ -26,13 +26,13 @@ namespace AncibleCoreServer.Services.Traits
         public override void Setup(WorldObject owner)
         {
             base.Setup(owner);
-            this.SendMessageTo(new AddAbilityModMessage{Ability = _ability, Mod = _mod, Type = _type}, _parent);
+            this.SendMessageTo(new AddAbilityModsMessage{Ability = _ability, Mods = _mods, Type = _type}, _parent);
         }
 
         public override void ApplyRemoval(WorldObject owner)
         {
             base.ApplyRemoval(owner);
-            this.SendMessageTo(new RemoveAbilityModMessage{Ability = _ability, Mod = _mod, Type = _type}, _parent);
+            this.SendMessageTo(new RemoveAbilityModsMessage{Ability = _ability, Mods = _mods, Type = _type}, _parent);
         }
     }
 }

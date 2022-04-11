@@ -164,7 +164,7 @@ namespace AncibleCoreServer.Services.ObjectManager
             _instance.SendMessageTo(addTraitToObjectMsg, obj);
 
             var talents = characterDatabase.GetCollection<CharacterTalent>(CharacterTalent.TABLE).FindAll().ToArray();
-            addTraitToObjectMsg.Trait = new PlayerClassTrait(character.Class, talents, character.Level, character.Experience, playerId);
+            addTraitToObjectMsg.Trait = new PlayerClassTrait(character.Class, talents, character.Level, character.Experience, character.UnspentTalentPoints, playerId);
             _instance.SendMessageTo(addTraitToObjectMsg, obj);
 
             var bonuses = characterDatabase.GetCollection<CharacterWorldBonus>(CharacterWorldBonus.TABLE).FindAll().ToArray();

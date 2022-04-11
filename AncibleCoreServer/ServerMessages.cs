@@ -627,7 +627,7 @@ namespace AncibleCoreServer
 
     public class RefreshTimerMessage : EventMessage
     {
-        public static RefreshTimerMessage INSTANCE = new RefreshTimerMessage();
+        public string Timer;
     }
 
     public class UpgradeAbilityMessage : EventMessage
@@ -646,17 +646,17 @@ namespace AncibleCoreServer
         public Action<ClientObjectIconData> DoAfter;
     }
 
-    public class AddAbilityModMessage : EventMessage
+    public class AddAbilityModsMessage : EventMessage
     {
         public string Ability;
-        public string Mod;
+        public string[] Mods;
         public AbilityModType Type;
     }
 
-    public class RemoveAbilityModMessage : EventMessage
+    public class RemoveAbilityModsMessage : EventMessage
     {
         public string Ability;
-        public string Mod;
+        public string[] Mods;
         public AbilityModType Type;
     }
 

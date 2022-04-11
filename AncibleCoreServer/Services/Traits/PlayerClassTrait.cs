@@ -25,12 +25,13 @@ namespace AncibleCoreServer.Services.Traits
 
         private Dictionary<string, ClientTalentData> _talents = new Dictionary<string, ClientTalentData>();
 
-        public PlayerClassTrait(string playerClass, CharacterTalent[] talents, int level, int experience, string playerId)
+        public PlayerClassTrait(string playerClass, CharacterTalent[] talents, int level, int experience, int unspentPoints, string playerId)
         {
             Name = NAME;
             _playerId = playerId;
             _class = playerClass;
             _level = level;
+            _unspentTalentPoints = unspentPoints;
             _experience = experience;
             for (var i = 0; i < talents.Length; i++)
             {
@@ -109,46 +110,53 @@ namespace AncibleCoreServer.Services.Traits
             var talents = msg.Upgrades.Select(t => TalentService.GetTalentByName(t.Talent)).Where(t => t != null).OrderBy(t => t.UnlockLevel).ThenBy(t => t.RequiredTalents.Length).ToArray();
             for (var i = 0; i < talents.Length; i++)
             {
-                if (_talents.TryGetValue(talents[i].Name, out var talent))
+                if (_unspentTalentPoints > 0)
                 {
-                    var upgrade = msg.Upgrades.FirstOrDefault(u => u.Talent == talents[i].Name);
-                    if (upgrade != null)
+                    if (_talents.TryGetValue(talents[i].Name, out var talent))
                     {
-                        var rank = talent.Rank + upgrade.IncreasedRank;
-                        if (rank > talents[i].Ranks.Length - 1)
+                        var upgrade = msg.Upgrades.FirstOrDefault(u => u.Talent == talents[i].Name);
+                        if (upgrade != null)
                         {
-                            rank = talents[i].Ranks.Length - 1;
-                        }
-
-                        if (rank > talent.Rank)
-                        {
-                            var difference = rank - talent.Rank;
-                            var addTraitToObjMsg = new AddTraitToObjectMessage();
-                            for (var r = 1; r <= difference; r++)
+                            var rank = talent.Rank + upgrade.IncreasedRank;
+                            if (rank > talents[i].Ranks.Length - 1)
                             {
-                                var traits = talents[i].Ranks[r + talent.Rank].ApplyOnRank.Select(TraitService.GetTrait).Where(t => t != null).ToArray();
-                                if (traits.Length > 0)
+                                rank = talents[i].Ranks.Length - 1;
+                            }
+
+                            if (rank > talent.Rank)
+                            {
+                                var difference = rank - talent.Rank;
+                                var addTraitToObjMsg = new AddTraitToObjectMessage();
+                                for (var r = 1; r <= difference; r++)
                                 {
-                                    for (var t = 0; t < traits.Length; t++)
+                                    var traits = talents[i].Ranks[r + talent.Rank].ApplyOnRank.Select(TraitService.GetTrait).Where(t => t != null).ToArray();
+                                    if (traits.Length > 0)
                                     {
-                                        addTraitToObjMsg.Trait = traits[i];
-                                        this.SendMessageTo(addTraitToObjMsg, _parent);
+                                        for (var t = 0; t < traits.Length; t++)
+                                        {
+                                            addTraitToObjMsg.Trait = traits[i];
+                                            this.SendMessageTo(addTraitToObjMsg, _parent);
+                                        }
                                     }
                                 }
+
+                                _unspentTalentPoints -= difference;
+                                talent.Rank = rank;
                             }
+                            
                         }
-                        talent.Rank = rank;
-                    }
-                }
-                else
-                {
-                    var missingTalents = talents[i].RequiredTalents.Where(t => !_talents.ContainsKey(t)).ToArray();
-                    if (missingTalents.Length > 0)
-                    {
-                        break;
                     }
                     else
                     {
+                        var missingTalents = talents[i].RequiredTalents.Where(t => !_talents.ContainsKey(t)).ToArray();
+                        if (missingTalents.Length > 0)
+                        {
+                            missingTalents = missingTalents.Where(m => msg.Upgrades.FirstOrDefault(u => u.Talent == m) == null).ToArray();
+                            if (missingTalents.Length > 0)
+                            {
+                                break;
+                            }
+                        }
                         var upgrade = msg.Upgrades.FirstOrDefault(u => u.Talent == talents[i].Name);
                         if (upgrade != null)
                         {
@@ -157,7 +165,9 @@ namespace AncibleCoreServer.Services.Traits
                             {
                                 rank = talents[i].Ranks.Length - 1;
                             }
-                            _talents.Add(talents[i].Name, new ClientTalentData{Name = talents[i].Name, Rank = rank});
+
+                            var difference = rank + 1;
+                            _talents.Add(talents[i].Name, new ClientTalentData { Name = talents[i].Name, Rank = rank });
                             var addTraitToObjMsg = new AddTraitToObjectMessage();
                             for (var r = 0; r <= rank; r++)
                             {
@@ -171,8 +181,13 @@ namespace AncibleCoreServer.Services.Traits
                                     }
                                 }
                             }
+                            _unspentTalentPoints -= difference;
                         }
                     }
+                }
+                else
+                {
+                    break;
                 }
             }
             this.SendMessageTo(FlagPlayerForUpdateMessage.INSTANCE, _parent);

@@ -105,7 +105,7 @@ namespace AncibleCoreServer.Services.Traits
 
         private void SubscribeToMessages()
         {
-            _parent.SubscribeWithFilter<RefreshTimerMessage>(RefreshTimer, Name);
+            _parent.SubscribeWithFilter<RefreshTimerMessage>(RefreshTimer, _instanceId);
             if (_show)
             {
                 _parent.SubscribeWithFilter<QueryClientIconDataMessage>(QueryClientIconData, _instanceId);
@@ -118,7 +118,12 @@ namespace AncibleCoreServer.Services.Traits
 
         private void RefreshTimer(RefreshTimerMessage msg)
         {
-            _timer?.Reset();
+            if (msg.Timer == Name)
+            {
+                _timer?.Reset();
+                _parent.Update = true;
+            }
+            
         }
 
         private void TakeDamage(TakeDamageMessage msg)
