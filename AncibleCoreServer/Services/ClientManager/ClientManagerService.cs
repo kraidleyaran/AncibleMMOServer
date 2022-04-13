@@ -43,7 +43,7 @@ namespace AncibleCoreServer.Services.ClientManager
 
         public static int GetClientConnectionId(string clientId)
         {
-            var client = Clients.Find(c => c.WorldId == clientId);
+            var client = Clients.FirstOrDefault(c => c.WorldId == clientId);
             if (client != null)
             {
                 return client.NetworkId;

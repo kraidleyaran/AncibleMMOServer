@@ -8,6 +8,7 @@ namespace AncibleCoreCommon.CommonData.Combat
         public int Health;
         public int PhysicalDefense;
         public int MagicalDefense;
+        public int DodgeRating;
 
         public static MonsterCombatStats operator +(MonsterCombatStats stats1, MonsterCombatStats stats2)
         {
@@ -15,7 +16,8 @@ namespace AncibleCoreCommon.CommonData.Combat
             {
                 Health = stats1.Health + stats2.Health,
                 PhysicalDefense = stats1.PhysicalDefense + stats2.PhysicalDefense,
-                MagicalDefense = stats1.MagicalDefense + stats2.MagicalDefense
+                MagicalDefense = stats1.MagicalDefense + stats2.MagicalDefense,
+                DodgeRating = stats1.DodgeRating + stats2.DodgeRating
             };
         }
 
@@ -25,7 +27,8 @@ namespace AncibleCoreCommon.CommonData.Combat
             {
                 Health = stats1.Health - stats2.Health,
                 PhysicalDefense = stats1.PhysicalDefense - stats2.PhysicalDefense,
-                MagicalDefense = stats1.MagicalDefense - stats2.MagicalDefense
+                MagicalDefense = stats1.MagicalDefense - stats2.MagicalDefense,
+                DodgeRating = stats1.DodgeRating - stats2.DodgeRating
             };
         }
 
@@ -35,7 +38,8 @@ namespace AncibleCoreCommon.CommonData.Combat
             {
                 Health = stats1.Health + stats2.Health,
                 PhysicalDefense = stats1.PhysicalDefense + stats2.PhysicalDefense,
-                MagicalDefense = stats1.MagicalDefense + stats2.MagicalDefense
+                MagicalDefense = stats1.MagicalDefense + stats2.MagicalDefense,
+                DodgeRating = stats1.DodgeRating + stats2.DodgeRating
             };
         }
 
@@ -45,7 +49,8 @@ namespace AncibleCoreCommon.CommonData.Combat
             {
                 Health = stats1.Health - stats2.Health,
                 PhysicalDefense = stats1.PhysicalDefense - stats2.PhysicalDefense,
-                MagicalDefense = stats1.MagicalDefense - stats2.MagicalDefense
+                MagicalDefense = stats1.MagicalDefense - stats2.MagicalDefense,
+                DodgeRating = stats1.DodgeRating + stats2.DodgeRating
             };
         }
     }

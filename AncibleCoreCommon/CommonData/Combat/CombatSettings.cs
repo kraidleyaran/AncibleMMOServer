@@ -17,13 +17,13 @@ namespace AncibleCoreCommon.CommonData.Combat
         public float MagicalDefensePerWisdom { get; set; }
         public float PhysicalHealPerWisdom { get; set; }
         public float MagicalHealPerWisdom { get; set; }
-        public float ChanceToDodgePerDexterity { get; set; }
+        public float DodgeRatingPerDexterity { get; set; }
         public float ChanceToCriticallyStrikePerDexterity { get; set; }
 
         public int MaxCriticalStrikeRating { get; set; }
         public float MaxCriticalStrike { get; set; }
         public int MaxDodgeRating { get; set; }
-        public float MaxDodge { get; set; }
+        public float MaxDodgeChance { get; set; }
         public float CritMultiplier { get; set; }
         public float DefenseFallOff { get; set; }
         public float DefenseFallOffMultiplier { get; set; }

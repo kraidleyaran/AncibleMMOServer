@@ -28,7 +28,8 @@ namespace AncibleCoreServer.Services.Command
             {"setmaxlevel", new ServerCommand(SetMaxLevel) },
             {"setdefaultcheckpoint", new ServerCommand(SetDefaultCheckpoint) },
             {"setcullingbox", new ServerCommand(SetCullingBox) },
-            {"setchestticks", new ServerCommand(SetChestTicks) }
+            {"setchestticks", new ServerCommand(SetChestTicks) },
+            {"setdefaultchatchannels", new ServerCommand(SetDefaultChatChannels) }
         };
 
         public override void Start()
@@ -226,6 +227,11 @@ namespace AncibleCoreServer.Services.Command
             {
                 _instance.Log("Requires ticks argument");
             }
+        }
+
+        private static void SetDefaultChatChannels(string[] args)
+        {
+            _instance.SendMessage(new SetDefaultChatChannelsMessage{Channels = args});
         }
 
         private void SubscribeToMessages()

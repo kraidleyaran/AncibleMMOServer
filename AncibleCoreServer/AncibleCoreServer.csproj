@@ -82,6 +82,8 @@
     <Compile Include="Services\Ability\Ability.cs" />
     <Compile Include="Services\Ability\AbilityService.cs" />
     <Compile Include="Services\CharacterClass\CharacterClassService.cs" />
+    <Compile Include="Services\Chat\ChatChannel.cs" />
+    <Compile Include="Services\Chat\ChatService.cs" />
     <Compile Include="Services\ClientManager\AuthenticationSession.cs" />
     <Compile Include="Services\ClientManager\ClientAuthenticationState.cs" />
     <Compile Include="Services\ClientManager\ClientManagerService.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Services\Traits\OverTimeTrait.cs" />
     <Compile Include="Services\Traits\PlayerAbilityManagerTrait.cs" />
     <Compile Include="Services\Traits\PlayerBonusManagerTrait.cs" />
+    <Compile Include="Services\Traits\PlayerChatTrait.cs" />
     <Compile Include="Services\Traits\PlayerClassTrait.cs" />
     <Compile Include="Services\Traits\PlayerCombatStatsTrait.cs" />
     <Compile Include="Services\Traits\PlayerEquipmentTrait.cs" />

@@ -170,6 +170,12 @@ namespace AncibleCoreCommon
                     return JsonConvert.DeserializeObject<ClientFinishMapTransferMessage>(json, settings);
                 case ClientTalentUpgradeRequestMessage.ID:
                     return JsonConvert.DeserializeObject<ClientTalentUpgradeRequestMessage>(json, settings);
+                case ClientChatUpdateMessage.ID:
+                    return JsonConvert.DeserializeObject<ClientChatUpdateMessage>(json, settings);
+                case ClientChatMessage.ID:
+                    return JsonConvert.DeserializeObject<ClientChatMessage>(json, settings);
+                case ClientJoinedChannelsMessage.ID:
+                    return JsonConvert.DeserializeObject<ClientJoinedChannelsMessage>(json, settings);
                 default:
                     return original;
             }

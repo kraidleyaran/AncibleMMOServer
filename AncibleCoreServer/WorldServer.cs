@@ -7,6 +7,7 @@ using AncibleCoreCommon;
 using AncibleCoreServer.Services;
 using AncibleCoreServer.Services.Ability;
 using AncibleCoreServer.Services.CharacterClass;
+using AncibleCoreServer.Services.Chat;
 using AncibleCoreServer.Services.ClientManager;
 using AncibleCoreServer.Services.Combat;
 using AncibleCoreServer.Services.Command;
@@ -104,6 +105,7 @@ namespace AncibleCoreServer
                     new WorldBonusService(settings.WorldBonusesPath),
                     new SaveService(3000),
                     new KeyAuthorityService(),
+                    new ChatService(),
                     new TickService(50)
                 };
                 for (var i = 0; i < _services.Count; i++)

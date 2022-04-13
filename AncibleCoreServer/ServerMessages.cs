@@ -681,4 +681,9 @@ namespace AncibleCoreServer
         public WorldBonusType Type;
         public Action<WorldBonusData[]> DoAfter;
     }
+
+    public class SetDefaultChatChannelsMessage : EventMessage
+    {
+        public string[] Channels;
+    }
 }

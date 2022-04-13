@@ -184,6 +184,7 @@
     <Compile Include="CommonData\WorldEvent\CastWorldEvent.cs" />
     <Compile Include="CommonData\WorldEvent\CustomStatusWorldEvent.cs" />
     <Compile Include="CommonData\WorldEvent\DamageEvent.cs" />
+    <Compile Include="CommonData\WorldEvent\DodgeWorldEvent.cs" />
     <Compile Include="CommonData\WorldEvent\HealWorldEvent.cs" />
     <Compile Include="CommonData\WorldEvent\LevelUpWorldEvent.cs" />
     <Compile Include="CommonData\WorldEvent\ProjectileWorldEvent.cs" />

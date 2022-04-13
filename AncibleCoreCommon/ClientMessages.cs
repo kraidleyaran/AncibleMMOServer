@@ -493,6 +493,35 @@ namespace AncibleCoreCommon
         public override int NetworkMessageId => ID;
     }
 
+    [JsonObject(MemberSerialization.OptOut)]
+    [Serializable]
+    public class ClientChatUpdateMessage : ClientMessage
+    {
+        public const int ID = 49;
+        public ChatMessageData[] Messages { get; set; }
+        public override int NetworkMessageId => ID;
+    }
 
-    //TODO: Don't forget to add the message to the factory method in CauldronUtils
+    [JsonObject(MemberSerialization.OptOut)]
+    [Serializable]
+    public class ClientChatMessage : ClientMessage
+    {
+        public const int ID = 50;
+        public string Message { get; set; }
+        public string Channel { get; set; }
+        public override int NetworkMessageId => ID;
+    }
+
+    [JsonObject(MemberSerialization.OptOut)]
+    [Serializable]
+    public class ClientJoinedChannelsMessage : ClientMessage
+    {
+        public const int ID = 51;
+        public string[] Channels { get; set; }
+        public override int NetworkMessageId => ID;
+    }
+
+
+
+    //TODO: Don't forget to add the message to the factory method in AncibleUtils
 }

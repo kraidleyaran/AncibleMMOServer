@@ -237,5 +237,17 @@ namespace AncibleCoreServer.Services.Combat
         {
             return(int) (stats.Endurance * CombatSettings.HealthRegenPerEndurance) + (CombatSettings.BaseHealthRegen);
         }
+
+        public static bool CalculateDodage(CombatStats stats)
+        {
+            var dodge = stats.DodgeRating + (int)(stats.Dexterity * CombatSettings.DodgeRatingPerDexterity);
+            if (dodge > CombatSettings.MaxDodgeRating)
+            {
+                dodge = CombatSettings.MaxDodgeRating;
+            }
+
+            var dodgeChance = dodge / CombatSettings.MaxDodgeChance;
+            return RNGService.Roll(dodgeChance);
+        }
     }
 }
