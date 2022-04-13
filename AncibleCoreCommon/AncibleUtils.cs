@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.RegularExpressions;
 using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Combat;
 using AncibleCoreCommon.CommonData.WorldBonuses;
@@ -322,6 +323,11 @@ namespace AncibleCoreCommon
             }
 
             return amount;
+        }
+
+        public static string StripHTML(string input)
+        {
+            return Regex.Replace(input, "<.*?>", string.Empty);
         }
     }
 

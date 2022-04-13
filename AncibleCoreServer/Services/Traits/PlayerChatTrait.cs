@@ -45,7 +45,8 @@ namespace AncibleCoreServer.Services.Traits
         {
             if (_joinedChannels.Contains(msg.Channel))
             {
-                ChatService.SendChatToChannel(msg.Message, _parent.DisplayName, _parent.Id, msg.Channel);
+                var cleanMessage = AncibleUtils.StripHTML(msg.Message);
+                ChatService.SendChatToChannel(cleanMessage, _parent.DisplayName, _parent.Id, msg.Channel);
             }
         }
 
