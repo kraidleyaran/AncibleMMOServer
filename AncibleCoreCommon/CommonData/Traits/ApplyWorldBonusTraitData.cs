@@ -9,5 +9,6 @@ namespace AncibleCoreCommon.CommonData.Traits
         public override string Type => TYPE;
 
         public string Bonus;
+        public bool Permanent;
     }
 }

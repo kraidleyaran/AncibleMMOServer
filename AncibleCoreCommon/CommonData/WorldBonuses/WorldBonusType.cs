@@ -5,6 +5,6 @@ namespace AncibleCoreCommon.CommonData.WorldBonuses
     [Serializable]
     public enum WorldBonusType
     {
-        Damage,Heal
+        Damage,Heal,Chance
     }
 }

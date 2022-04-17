@@ -148,6 +148,10 @@ namespace AncibleCoreServer.Services.Traits
                     }
                     else
                     {
+                        if (_level + 1 < talents[i].UnlockLevel)
+                        {
+                            break;
+                        }
                         var missingTalents = talents[i].RequiredTalents.Where(t => !_talents.ContainsKey(t)).ToArray();
                         if (missingTalents.Length > 0)
                         {

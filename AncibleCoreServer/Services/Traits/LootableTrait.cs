@@ -126,10 +126,11 @@ namespace AncibleCoreServer.Services.Traits
                 if (item != null)
                 {
                     var returnStack = 0;
+                    var looter = _validLooters.Length > 1 ? _validLooters[RNGService.RollRange(0, _validLooters.Length)] : _currentLooter;
                     this.SendMessageTo(new AddItemToInventoryMessage
                     {
                         Item = item.Item, Stack = item.Stack, ReturnStack = stack => returnStack = stack, Announce = true
-                    }, _currentLooter);
+                    }, looter);
                     if (returnStack > 0)
                     {
                         item.Stack = returnStack;

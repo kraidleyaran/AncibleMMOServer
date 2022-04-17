@@ -10,5 +10,6 @@ namespace AncibleCoreCommon.CommonData.Traits
 
         public float ChanceToApply;
         public string[] ApplyOnChance;
+        public string[] Tags;
     }
 }

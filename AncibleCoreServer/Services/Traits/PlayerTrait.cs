@@ -189,7 +189,7 @@ namespace AncibleCoreServer.Services.Traits
         private void SaveBonuses()
         {
             var worldBonuses = new WorldBonusData[0];
-            this.SendMessageTo(new QueryWorldBonusesMessage{DoAfter = bonuses => worldBonuses = bonuses}, _parent);
+            this.SendMessageTo(new QueryWorldBonusesMessage{DoAfter = (bonuses, temporary) => worldBonuses = bonuses}, _parent);
             var bonusesCollection = _characterDatabase.GetCollection<CharacterWorldBonus>(CharacterWorldBonus.TABLE);
             bonusesCollection.DeleteAll();
             for (var i = 0; i < worldBonuses.Length; i++)
@@ -265,6 +265,14 @@ namespace AncibleCoreServer.Services.Traits
                     _characterData.Talents = talents;
                     _characterData.UnspentTalentPoints = unspentTalentPoints;
                 }}, _parent);
+
+            var worldBonuses = new List<WorldBonusData>();
+            this.SendMessageTo(new QueryWorldBonusesMessage{DoAfter = (bonuses, temporary) =>
+            {
+                worldBonuses.AddRange(bonuses);
+                worldBonuses.AddRange(temporary);
+            }}, _parent);
+            _characterData.WorldBonuses = worldBonuses.Select(b => b.Name).ToArray();
 
             msg.DoAfter.Invoke(_characterData);
         }

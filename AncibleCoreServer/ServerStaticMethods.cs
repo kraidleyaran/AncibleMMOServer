@@ -96,6 +96,8 @@ namespace AncibleCoreServer
                     return new ApplyAbilityModTrait(data);
                 case ApplyWorldBonusTraitData.TYPE:
                     return new ApplyWorldBonusTrait(data);
+                case DialogueTraitData.TYPE:
+                    return new DialogueTrait(data);
                 default:
                     return new ObjectTrait(data);
             }
@@ -317,6 +319,9 @@ namespace AncibleCoreServer
                 }
             }
         }
+
+
+
 
 
     }

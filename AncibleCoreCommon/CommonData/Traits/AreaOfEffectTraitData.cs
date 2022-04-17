@@ -12,5 +12,6 @@ namespace AncibleCoreCommon.CommonData.Traits
         public int Area;
         public string[] ApplyToTargets;
         public AbilityAlignment AlignmentRequirement;
+        public int TargetCount = 0;
     }
 }

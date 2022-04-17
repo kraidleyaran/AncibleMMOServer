@@ -56,7 +56,7 @@ namespace AncibleCoreServer.Services.Traits
                 amount += bonus;
                 var worldBonuses = new WorldBonusData[0];
                 this.SendMessageTo(new QueryWorldBonusesByTagsMessage{Type = WorldBonusType.Heal, Tags = _tags, DoAfter = bonuses => worldBonuses = bonuses}, parentObj);
-                amount += worldBonuses.GetBonusesTotal();
+                amount += worldBonuses.GetBonusesTotal(amount);
                 if (_broadcast)
                 {
                     this.SendMessageTo(new BroadcastHealMessage { Amount = amount, Owner = parentObj }, parentObj);

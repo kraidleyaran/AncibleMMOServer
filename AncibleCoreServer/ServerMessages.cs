@@ -663,16 +663,18 @@ namespace AncibleCoreServer
     public class AddWorldBonusMessage : EventMessage
     {
         public WorldBonusData Bonus;
+        public bool Permanent;
     }
 
     public class RemoveWorldBonusMessage : EventMessage
     {
         public WorldBonusData Bonus;
+        public bool Permanent;
     }
 
     public class QueryWorldBonusesMessage : EventMessage
     {
-        public Action<WorldBonusData[]> DoAfter;
+        public Action<WorldBonusData[], WorldBonusData[]> DoAfter;
     }
 
     public class QueryWorldBonusesByTagsMessage : EventMessage

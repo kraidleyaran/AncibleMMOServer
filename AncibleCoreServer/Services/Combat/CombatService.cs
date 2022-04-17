@@ -235,7 +235,7 @@ namespace AncibleCoreServer.Services.Combat
 
         public static int CalculateHealthRegen(CombatStats stats)
         {
-            return(int) (stats.Endurance * CombatSettings.HealthRegenPerEndurance) + (CombatSettings.BaseHealthRegen);
+            return (int) (stats.Endurance * CombatSettings.HealthRegenPerEndurance) + (CombatSettings.BaseHealthRegen);
         }
 
         public static bool CalculateDodage(CombatStats stats)
@@ -246,7 +246,11 @@ namespace AncibleCoreServer.Services.Combat
                 dodge = CombatSettings.MaxDodgeRating;
             }
 
-            var dodgeChance = dodge / CombatSettings.MaxDodgeChance;
+            var dodgeChance = (float)dodge / CombatSettings.MaxDodgeRating;
+            if (dodgeChance > CombatSettings.MaxDodgeChance)
+            {
+                dodgeChance = CombatSettings.MaxDodgeChance;
+            }
             return RNGService.Roll(dodgeChance);
         }
     }

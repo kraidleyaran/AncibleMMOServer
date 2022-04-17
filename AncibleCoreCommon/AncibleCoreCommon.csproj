@@ -146,6 +146,7 @@
     <Compile Include="CommonData\Traits\ApplyAbilityModTraitData.cs" />
     <Compile Include="CommonData\Traits\ApplyCombatStatsTraitData.cs" />
     <Compile Include="CommonData\Traits\ApplyResourceMaximumTraitData.cs" />
+    <Compile Include="CommonData\Traits\ApplyValueType.cs" />
     <Compile Include="CommonData\Traits\ApplyWorldBonusTraitData.cs" />
     <Compile Include="CommonData\Traits\AreaOfEffectTraitData.cs" />
     <Compile Include="CommonData\Traits\CastingTraitData.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="CommonData\Traits\DamageTraitData.cs" />
     <Compile Include="CommonData\Traits\DamageType.cs" />
     <Compile Include="CommonData\Traits\DestroyObjectTraitData.cs" />
+    <Compile Include="CommonData\Traits\DialogueTraitData.cs" />
     <Compile Include="CommonData\Traits\HealerTraitData.cs" />
     <Compile Include="CommonData\Traits\HealTraitData.cs" />
     <Compile Include="CommonData\Traits\MapTransferTraitData.cs" />

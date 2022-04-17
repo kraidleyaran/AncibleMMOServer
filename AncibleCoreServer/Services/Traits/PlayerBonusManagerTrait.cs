@@ -13,6 +13,7 @@ namespace AncibleCoreServer.Services.Traits
         private const string NAME = "Player Bonus ManagerTrait";
 
         private List<WorldBonusData> _bonuses = new List<WorldBonusData>();
+        private List<WorldBonusData> _temporary = new List<WorldBonusData>();
 
         public PlayerBonusManagerTrait(CharacterWorldBonus[] bonuses)
         {
@@ -43,23 +44,41 @@ namespace AncibleCoreServer.Services.Traits
 
         private void AddWorldBonus(AddWorldBonusMessage msg)
         {
+            if (msg.Permanent)
+            {
+                _bonuses.Add(msg.Bonus);
+            }
+            else
+            {
+                _temporary.Add(msg.Bonus);
+            }
             //TODO: Should multiple of the same world bonus be able to be added?
-            _bonuses.Add(msg.Bonus);
+            
         }
 
         private void RemoveWorldBonus(RemoveWorldBonusMessage msg)
         {
-            _bonuses.Remove(msg.Bonus);
+            if (msg.Permanent)
+            {
+                _bonuses.Remove(msg.Bonus);
+            }
+            else
+            {
+                _temporary.Remove(msg.Bonus);
+            }
+            
         }
 
         private void QueryWorldBonuses(QueryWorldBonusesMessage msg)
         {
-            msg.DoAfter.Invoke(_bonuses.ToArray());
+            msg.DoAfter.Invoke(_bonuses.ToArray(), _temporary.ToArray());
         }
 
         private void QueryWorldBonusesByTag(QueryWorldBonusesByTagsMessage msg)
         {
-            msg.DoAfter.Invoke(_bonuses.Where(b => b.Type == msg.Type && b.Tags.Any(t => msg.Tags.Any(bt => bt == t))).ToArray());
+            var bonuses = _bonuses.Where(b => b.Type == msg.Type && b.Tags.Any(t => msg.Tags.Any(bt => bt == t))).ToList();
+            bonuses.AddRange(_temporary.Where(b => b.Type == msg.Type && b.Tags.Any(t => msg.Tags.Any(bt => bt == t))));
+            msg.DoAfter.Invoke(bonuses.ToArray());
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Traits;
+using AncibleCoreServer.Services.Combat;
 using AncibleCoreServer.Services.ObjectManager;
 using MessageBusLib;
 
@@ -60,7 +60,16 @@ namespace AncibleCoreServer.Services.Traits
 
                 if (validLooters.Count > 0)
                 {
-                    var gainClassExperienceMsg = new GainClassExperienceMessage { Amount = _experience.GenerateRandomNumber(RNGService.RANDOM) };
+                    var experience = _experience.GenerateRandomNumber(RNGService.RANDOM);
+                    if (validLooters.Count > 1)
+                    {
+                        experience = (int)((float)experience / validLooters.Count * CombatService.CombatSettings.ExperiencePerPlayerBonus);
+                        if (experience <= 0)
+                        {
+                            experience = 1;
+                        }
+                    }
+                    var gainClassExperienceMsg = new GainClassExperienceMessage { Amount = experience};
                     for (var i = 0; i < validLooters.Count; i++)
                     {
                         this.SendMessageTo(gainClassExperienceMsg, validLooters[i]);

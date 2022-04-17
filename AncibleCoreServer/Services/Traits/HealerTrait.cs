@@ -36,18 +36,21 @@ namespace AncibleCoreServer.Services.Traits
 
         private void InteractWithObject(InteractWithObjectMessage msg)
         {
-            _parent.SendMessageTo(FullHealMessage.INSTANCE, msg.Owner);
-            var traits = _applyOnInteract.Select(TraitService.GetTrait).Where(t => t != null).ToArray();
-            if (traits.Length > 0)
+            if (msg.Type == InteractionType.Heal)
             {
-                var addTraitToObjMsg = new AddTraitToObjectMessage();
-                for (var i = 0; i < traits.Length; i++)
+                _parent.SendMessageTo(FullHealMessage.INSTANCE, msg.Owner);
+                var traits = _applyOnInteract.Select(TraitService.GetTrait).Where(t => t != null).ToArray();
+                if (traits.Length > 0)
                 {
-                    addTraitToObjMsg.Trait = traits[i];
-                    _parent.SendMessageTo(addTraitToObjMsg, msg.Owner);
+                    var addTraitToObjMsg = new AddTraitToObjectMessage();
+                    for (var i = 0; i < traits.Length; i++)
+                    {
+                        addTraitToObjMsg.Trait = traits[i];
+                        _parent.SendMessageTo(addTraitToObjMsg, msg.Owner);
+                    }
                 }
+                _parent.SendMessageTo(new InteractionFinishedMessage { Object = _parent }, msg.Owner);
             }
-            _parent.SendMessageTo(new InteractionFinishedMessage{Object = _parent}, msg.Owner);
         }
 
     }

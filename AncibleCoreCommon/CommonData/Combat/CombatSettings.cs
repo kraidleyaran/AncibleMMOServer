@@ -48,5 +48,7 @@ namespace AncibleCoreCommon.CommonData.Combat
         public int HealthRegenTick { get; set; }
         public int BaseHealthRegen { get; set; }
         public int HealthRegenCooldown { get; set; }
+
+        public float ExperiencePerPlayerBonus { get; set; }
     }
 }

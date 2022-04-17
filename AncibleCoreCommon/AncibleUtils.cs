@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Combat;
+using AncibleCoreCommon.CommonData.Traits;
 using AncibleCoreCommon.CommonData.WorldBonuses;
 using Newtonsoft.Json;
 
@@ -177,6 +178,8 @@ namespace AncibleCoreCommon
                     return JsonConvert.DeserializeObject<ClientChatMessage>(json, settings);
                 case ClientJoinedChannelsMessage.ID:
                     return JsonConvert.DeserializeObject<ClientJoinedChannelsMessage>(json, settings);
+                case ClientShowDialogueMessage.ID:
+                    return JsonConvert.DeserializeObject<ClientShowDialogueMessage>(json, settings);
                 default:
                     return original;
             }
@@ -314,12 +317,34 @@ namespace AncibleCoreCommon
             }
         }
 
-        public static int GetBonusesTotal(this WorldBonusData[] bonuses)
+        public static int GetBonusesTotal(this WorldBonusData[] bonuses, int baseAmount)
         {
             var amount = 0;
             for (var i = 0; i < bonuses.Length; i++)
             {
-                amount += bonuses[i].Amount;
+                amount += bonuses[i].ApplyBonus(baseAmount);
+            }
+
+            return amount;
+        }
+
+        public static float GetChanceBonusesTotal(this WorldBonusData[] bonuses, float baseChance)
+        {
+            var amount = 0f;
+            for (var i = 0; i < bonuses.Length; i++)
+            {
+                if (bonuses[i].Type == WorldBonusType.Chance)
+                {
+                    switch (bonuses[i].ApplyType)
+                    {
+                        case ApplyValueType.Absolute:
+                            return bonuses[i].Amount;
+                        case ApplyValueType.Percentage:
+                            return (bonuses[i].Amount * baseChance);
+                        default:
+                            return bonuses[i].Amount;
+                    }
+                }
             }
 
             return amount;
@@ -328,6 +353,19 @@ namespace AncibleCoreCommon
         public static string StripHTML(string input)
         {
             return Regex.Replace(input, "<.*?>", string.Empty);
+        }
+
+        public static int ApplyBonus(this WorldBonusData data, int baseAmount)
+        {
+            switch (data.ApplyType)
+            {
+                case ApplyValueType.Absolute:
+                    return (int)data.Amount;
+                case ApplyValueType.Percentage:
+                    return (int)(data.Amount * baseAmount);
+                default:
+                    return (int)data.Amount;
+            }
         }
     }
 

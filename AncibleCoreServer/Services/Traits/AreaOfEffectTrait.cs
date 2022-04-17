@@ -15,6 +15,7 @@ namespace AncibleCoreServer.Services.Traits
         private int _area = 1;
         private string[] _applyToTargets;
         private AbilityAlignment _alignment = AbilityAlignment.All;
+        private int _targetCount = 0;
 
         public AreaOfEffectTrait(TraitData data) : base(data)
         {
@@ -23,6 +24,7 @@ namespace AncibleCoreServer.Services.Traits
                 _area = areaData.Area;
                 _applyToTargets = areaData.ApplyToTargets;
                 _alignment = areaData.AlignmentRequirement;
+                _targetCount = areaData.TargetCount;
             }
         }
 
@@ -39,6 +41,12 @@ namespace AncibleCoreServer.Services.Traits
             {
                 
                 var objs = tilesWithObjs[i].ObjectsOnTile.ToArray();
+                var targetCount = objs.Length;
+                if (_targetCount > 0 && _targetCount < objs.Length)
+                {
+                    targetCount = _targetCount;
+                }
+                var hitTargets = 0;
                 for (var o = 0; o < objs.Length; o++)
                 {
                     var obj = objs[o];
@@ -61,6 +69,7 @@ namespace AncibleCoreServer.Services.Traits
 
                     if (apply)
                     {
+                        hitTargets++;
                         var traits = _applyToTargets.Select(TraitService.GetTrait).Where(t => t != null).ToArray();
                         if (traits.Length > 0)
                         {
@@ -71,6 +80,11 @@ namespace AncibleCoreServer.Services.Traits
                             }
                         }
 
+                    }
+
+                    if (hitTargets >= targetCount)
+                    {
+                        break;
                     }
                 }
 

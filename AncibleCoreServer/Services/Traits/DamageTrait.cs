@@ -1,4 +1,5 @@
-﻿using AncibleCoreCommon;
+﻿using System;
+using AncibleCoreCommon;
 using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Combat;
 using AncibleCoreCommon.CommonData.Traits;
@@ -92,7 +93,7 @@ namespace AncibleCoreServer.Services.Traits
                     amount += (int)(CombatService.CalculateBonusDamage(_type, ownerStats) * _bonusMultiplier);
                     var worldBonuses = new WorldBonusData[0];
                     this.SendMessageTo(new QueryWorldBonusesByTagsMessage { Tags = _tags, Type = WorldBonusType.Damage, DoAfter = bonuses => worldBonuses = bonuses }, damageOwner);
-                    amount += worldBonuses.GetBonusesTotal();
+                    amount += worldBonuses.GetBonusesTotal(amount);
                     var critAmount = CombatService.CalculateCritDamage(_type, ownerStats, amount);
                     if (critAmount != amount)
                     {

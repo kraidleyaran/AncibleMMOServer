@@ -521,7 +521,15 @@ namespace AncibleCoreCommon
         public override int NetworkMessageId => ID;
     }
 
-
+    [JsonObject(MemberSerialization.OptOut)]
+    [Serializable]
+    public class ClientShowDialogueMessage : ClientMessage
+    {
+        public const int ID = 52;
+        public string Dialogue { get; set; }
+        public string OwnerId { get; set; }
+        public override int NetworkMessageId => ID;
+    }
 
     //TODO: Don't forget to add the message to the factory method in AncibleUtils
 }

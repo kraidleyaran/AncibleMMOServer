@@ -26,6 +26,7 @@ namespace AncibleCoreCommon.CommonData.Client
         public ClientStatusEffectData[] StatusEffects;
         public IntNumberRange WeaponDamage;
         public ClientObjectIconData[] Icons;
+        public string[] WorldBonuses;
         
         public int MaxInventorySlots;
         public int Gold;

@@ -1,4 +1,5 @@
 ﻿using System;
+using AncibleCoreCommon.CommonData.Traits;
 
 namespace AncibleCoreCommon.CommonData.WorldBonuses
 {
@@ -7,7 +8,8 @@ namespace AncibleCoreCommon.CommonData.WorldBonuses
     {
         public string Name;
         public WorldBonusType Type;
-        public int Amount;
+        public float Amount;
+        public ApplyValueType ApplyType;
         public string[] Tags;
     }
 }

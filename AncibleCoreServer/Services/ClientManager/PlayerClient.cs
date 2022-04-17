@@ -78,6 +78,7 @@ namespace AncibleCoreServer.Services.ClientManager
             Character.SubscribeWithFilter<ClientShowLootWindowMessage>(ClientShowLootWindow, WorldId);
             Character.SubscribeWithFilter<ClientMoveItemToSlotResultMessage>(ClientMoveItemToSlotResult, WorldId);
             Character.SubscribeWithFilter<ClientTransferToMapMessage>(ClientTransferToMap, WorldId);
+            Character.SubscribeWithFilter<ClientShowDialogueMessage>(ClientShowDialogue, WorldId);
         }
 
         private void ClientCreateCharacterRequest(ClientCreateCharacterRequestMessage msg)
@@ -392,6 +393,10 @@ namespace AncibleCoreServer.Services.ClientManager
             WorldServer.SendMessageToClient(msg, NetworkId);
         }
 
+        private void ClientShowDialogue(ClientShowDialogueMessage msg)
+        {
+            WorldServer.SendMessageToClient(msg, NetworkId);
+        }
         
 
         private void SaveData(SaveDataMessage msg)
