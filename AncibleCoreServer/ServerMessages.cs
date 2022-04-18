@@ -688,4 +688,9 @@ namespace AncibleCoreServer
     {
         public string[] Channels;
     }
+
+    public class AggroDroppedMessage : EventMessage
+    {
+        public static AggroDroppedMessage INSTANCE = new AggroDroppedMessage();
+    }
 }

@@ -34,6 +34,7 @@ namespace AncibleCoreServer.Services.Traits
             _parent.SubscribeWithFilter<AddLooterMessage>(AddLooter, _instanceId);
             _parent.SubscribeWithFilter<SpawnLootMessage>(SpawnLoot, _instanceId);
             _parent.SubscribeWithFilter<BroadcastHealMessage>(BroadcastHeal, _instanceId);
+            _parent.SubscribeWithFilter<AggroDroppedMessage>(AggroDropped, _instanceId);
         }
 
         private void AddLooter(AddLooterMessage msg)
@@ -130,6 +131,11 @@ namespace AncibleCoreServer.Services.Traits
             {
                 _looters.Add(msg.Owner.Id);
             }
+        }
+
+        private void AggroDropped(AggroDroppedMessage msg)
+        {
+            _looters.Clear();
         }
     }
 }

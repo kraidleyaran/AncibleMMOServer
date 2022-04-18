@@ -239,6 +239,7 @@ namespace AncibleCoreServer.Services.Traits
                 {
                     this.SendMessageTo(FullHealMessage.INSTANCE, _parent);
                 }
+                this.SendMessageTo(AggroDroppedMessage.INSTANCE, _parent);
                 this.SendMessageTo(new SetAiStateMessage{State = AiState.Wandering}, _parent);
             }
             
