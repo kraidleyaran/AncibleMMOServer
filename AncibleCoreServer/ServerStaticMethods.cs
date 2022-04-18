@@ -110,7 +110,9 @@ namespace AncibleCoreServer
                 Name = character.Name,
                 Map = character.Map,
                 Class = character.Class,
-                Level = character.Level
+                Level = character.Level,
+                Sprite = character.Sprite,
+                LastLogin = character.LastLogin
             };
         }
 

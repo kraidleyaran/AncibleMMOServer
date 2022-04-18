@@ -20,5 +20,6 @@ namespace AncibleCoreServer.Data
         public int MaxInventorySlots { get; set; }
         public int Gold { get; set; }
         public string Checkpoint { get; set; }
+        public DateTime LastLogin { get; set; }
     }
 }

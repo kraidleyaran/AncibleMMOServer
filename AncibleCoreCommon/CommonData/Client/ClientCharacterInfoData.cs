@@ -8,6 +8,8 @@ namespace AncibleCoreCommon.CommonData.Client
         public string Name;
         public string Class;
         public string Map;
+        public string Sprite;
         public int Level;
+        public DateTime LastLogin = DateTime.MinValue;
     }
 }

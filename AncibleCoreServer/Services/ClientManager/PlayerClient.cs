@@ -160,7 +160,8 @@ namespace AncibleCoreServer.Services.ClientManager
                         Path = characterPath,
                         Sprite = playerClass.Sprites[0],
                         MaxInventorySlots = ItemService.StartingMaxInventorySlots,
-                        Checkpoint = MapService.DefaultCheckpoint.Name
+                        Checkpoint = MapService.DefaultCheckpoint.Name,
+                        LastLogin = DateTime.UtcNow
                     };
                     var id = characters.Insert(character);
                     var characterStatsCollection = UserDatabase.GetCollection<CharacterCombatStats>(CharacterCombatStats.TABLE);
@@ -175,6 +176,7 @@ namespace AncibleCoreServer.Services.ClientManager
                     characterGrowthCollection.Insert(characterGrowth);
                     UserDatabase.Commit();
                     characterResultMsg.Success = true;
+                    characterResultMsg.Character = character.Name;
                     WorldServer.SendMessageToClient(characterResultMsg, NetworkId);
                     _ticksSinceLastCheckIn = 0;
                 }
@@ -196,7 +198,8 @@ namespace AncibleCoreServer.Services.ClientManager
         {
             if (UserDatabase != null && Character == null)
             {
-                var character = UserDatabase.GetCollection<WorldCharacter>(WorldCharacter.TABLE).FindOne(c => c.Name == msg.Name);
+                var characterCollection = UserDatabase.GetCollection<WorldCharacter>(WorldCharacter.TABLE);
+                var character = characterCollection.FindOne(c => c.Name == msg.Name);
                 if (character != null)
                 {
                     var userCollection = DatabaseService.Main.GetCollection<WorldUser>(WorldUser.TABLE);
@@ -230,6 +233,9 @@ namespace AncibleCoreServer.Services.ClientManager
                             WorldServer.SendMessageToClient(new ClientObjectUpdateMessage { Objects = objects, MapChange = false, Blocking = blocking }, NetworkId);
                         }
                     }
+
+                    character.LastLogin = DateTime.UtcNow;
+                    characterCollection.Update(character);
                 }
                 else
                 {

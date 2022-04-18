@@ -67,6 +67,7 @@ namespace AncibleCoreCommon
     {
         public const int ID = 5;
         public bool Success { get; set; }
+        public string Character { get; set; }
         public string Message { get; set; }
         public override int NetworkMessageId => ID;
     }
