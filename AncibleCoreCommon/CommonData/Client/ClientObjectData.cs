@@ -7,6 +7,7 @@ namespace AncibleCoreCommon.CommonData.Client
     public class ClientObjectData
     {
         public string Name;
+        public string Subtitle;
         public string ObjectId;
         public string Sprite;
         public Vector2IntData Position;

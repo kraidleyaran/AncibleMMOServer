@@ -12,6 +12,7 @@ namespace AncibleCoreServer.Services.ObjectManager
     public class WorldObject
     {
         public string DisplayName;
+        public string Subtitle;
         public string Id { get; private set; }
         public bool BeingDestroy { get; private set; }
         public bool Update;
@@ -38,6 +39,7 @@ namespace AncibleCoreServer.Services.ObjectManager
         public ClientObjectData GetClientObjectData()
         {
             _data.Name = DisplayName;
+            _data.Subtitle = Subtitle;
             _data.Sprite = Sprite;
             _data.Position = Tile.Position;
             _data.Interactions = Interactions.ToArray();

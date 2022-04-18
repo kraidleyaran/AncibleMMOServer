@@ -199,7 +199,8 @@ namespace AncibleCoreServer.Services.ObjectManager
                         Tile = tile,
                         Map = map,
                         Visible = data.Visible,
-                        DisplayName = data.Name
+                        DisplayName = data.Name,
+                        Subtitle = data.Subtitle
                     };
                     obj.Tile.ObjectsOnTile.Add(obj);
                     if (data.Blocking)

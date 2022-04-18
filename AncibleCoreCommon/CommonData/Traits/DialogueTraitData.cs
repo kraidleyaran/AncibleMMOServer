@@ -7,5 +7,6 @@ namespace AncibleCoreCommon.CommonData.Traits
     {
         public const string TYPE = "Dialogue Trait Data";
         public override string Type => TYPE;
+        public bool Inspect = false;
     }
 }
