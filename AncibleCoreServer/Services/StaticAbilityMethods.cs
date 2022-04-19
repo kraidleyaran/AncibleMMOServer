@@ -4,7 +4,6 @@ using AncibleCoreCommon.CommonData;
 using AncibleCoreCommon.CommonData.Ability;
 using AncibleCoreCommon.CommonData.Traits;
 using AncibleCoreCommon.CommonData.WorldEvent;
-using AncibleCoreServer.Services.Ability;
 using AncibleCoreServer.Services.ObjectManager;
 using AncibleCoreServer.Services.Traits;
 using MessageBusLib;

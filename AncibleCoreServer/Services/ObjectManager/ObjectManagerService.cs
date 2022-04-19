@@ -71,7 +71,6 @@ namespace AncibleCoreServer.Services.ObjectManager
 
         public static void RemoveObjectFromWorld(string map, WorldObject obj)
         {
-            
             _instance._allObjects.Remove(obj.Id);
             obj.Destroy();
         }
