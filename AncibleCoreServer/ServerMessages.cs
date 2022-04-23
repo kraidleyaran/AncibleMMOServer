@@ -54,11 +54,6 @@ namespace AncibleCoreServer
         public static WorldTickMessage INSTANCE = new WorldTickMessage();
     }
 
-    public class SetDefaultPlayerCharacterTraitsMessage : EventMessage
-    {
-        public string[] Traits;
-    }
-
     public class QueryClientObjectDataMessage : EventMessage
     {
         public ClientObjectData Data;
@@ -82,19 +77,6 @@ namespace AncibleCoreServer
     public class SaveDataMessage : EventMessage
     {
         public static SaveDataMessage INSTANCE = new SaveDataMessage();
-    }
-
-    public class BattleResultMessage : EventMessage
-    {
-        public bool Victory;
-        public string EncounterId;
-        public int Experience;
-        public bool Loot;
-        public bool Flee;
-        public int TurnCount;
-        public int DamageDone;
-        public int HealingDone;
-        public int DamageTaken;
     }
 
     public class RefreshPlayerDataMessage : EventMessage

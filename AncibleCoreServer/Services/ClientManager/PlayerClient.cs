@@ -12,6 +12,7 @@ using AncibleCoreServer.Services.ObjectManager;
 using LiteDB;
 using LiteDB.Engine;
 using MessageBusLib;
+using MLAPI.Cryptography.KeyExchanges;
 
 namespace AncibleCoreServer.Services.ClientManager
 {
@@ -56,6 +57,7 @@ namespace AncibleCoreServer.Services.ClientManager
             this.SubscribeWithFilter<ClientCharacterRequestMessage>(ClientCharacterRequest, WorldId);
             this.SubscribeWithFilter<ClientCheckInResponseMessage>(ClientCheckInResponse,WorldId);
             this.SubscribeWithFilter<ClientEnterWorldWithCharacterRequestMessage>(ClientEnterWorldWithCharacterRequest, WorldId);
+            this.SubscribeWithFilter<ClientLeaveWorldRequestMessage>(ClientLeaveWorldRequest, WorldId); 
             this.SubscribeWithFilter<DisconnectClientMessage>(DisconnectClient, WorldId);
         }
 
@@ -249,6 +251,8 @@ namespace AncibleCoreServer.Services.ClientManager
             _ticksSinceLastCheckIn = 0;
         }
 
+
+
         private void WorldTick(WorldTickMessage msg)
         {
             //_ticksSinceLastCheckIn++;
@@ -403,7 +407,24 @@ namespace AncibleCoreServer.Services.ClientManager
         {
             WorldServer.SendMessageToClient(msg, NetworkId);
         }
-        
+
+        private void ClientLeaveWorldRequest(ClientLeaveWorldRequestMessage msg)
+        {
+            if (Character != null)
+            {
+                this.Unsubscribe<UpdateClientsTickMessage>();
+                this.SendMessageTo(PlayerDisconnectingMessage.INSTANCE, Character);
+                this.SendMessageTo(SaveDataMessage.INSTANCE, this);
+                this.SendMessageTo(SaveDataMessage.INSTANCE, Character);
+                ObjectManagerService.RemoveObjectFromWorld(Character.Map, Character);
+                Character = null;
+                WorldServer.SendMessageToClient(new ClientLeaveWorldResultMessage{Success = true}, NetworkId);
+            }
+            else
+            {
+                WorldServer.SendMessageToClient(new ClientLeaveWorldResultMessage { Success = false, Message = "Character not found" }, NetworkId);
+            }
+        }
 
         private void SaveData(SaveDataMessage msg)
         {

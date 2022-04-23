@@ -117,6 +117,7 @@ namespace AncibleCoreServer.Services.ClientManager
             this.Subscribe<UnregisterClientMessage>(UnregisterClient);
             this.Subscribe<UserListMessage>(UsersList);
             this.Subscribe<ResetPasswordForUserMessage>(ResetPasswordForUser);
+            this.Subscribe<ClientClaimKeyRequestMessage>(ClientClaimKeyRequest);
         }
 
         private void RegisterClient(RegisterClientMessage msg)
@@ -223,6 +224,41 @@ namespace AncibleCoreServer.Services.ClientManager
                 });
                 thread.Start();
             }
+        }
+
+        private void ClientClaimKeyRequest(ClientClaimKeyRequestMessage msg)
+        {
+            var existingClient = Clients.FirstOrDefault(c => c.WorldId == msg.ClientId);
+            if (existingClient != null)
+            {
+                if (!KeyAuthorityService.IsKeyValid(msg.GameKey))
+                {
+                    WorldServer.SendMessageToClient(new ClientClaimKeyResultMessage { Success = false, Message = "Invalid Game Key" }, existingClient.NetworkId);
+                    return;
+                }
+                var key = msg.Key;
+                var dh = new ECDiffieHellman(existingClient.Session.AuthKey);
+                try
+                {
+                    var secureLogin = AncibleUtils.ConvertToSecureLogin(AncibleCrypto.Decrypt(msg.Login, dh.GetSharedSecretRaw(key), msg.Iv));
+                    if (secureLogin != null && !DoesUserNameExist(secureLogin.Username))
+                    {
+                        KeyAuthorityService.ClaimKey(msg.GameKey, secureLogin.Username);
+                        this.SendMessage(new CreateUserMessage { Username = secureLogin.Username, Password = secureLogin.Password });
+                        WorldServer.SendMessageToClient(new ClientClaimKeyResultMessage { Success = true }, existingClient.NetworkId);
+                    }
+                    else
+                    {
+                        WorldServer.SendMessageToClient(new ClientClaimKeyResultMessage { Success = false, Message = "Invalid Username" }, existingClient.NetworkId);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Player Client - Exception during ClientKeyClaimRequest - {ex}");
+                    WorldServer.SendMessageToClient(new ClientClaimKeyResultMessage { Success = false, Message = "Invalid Username" }, existingClient.NetworkId);
+                }
+            }
+
         }
 
         private void CreateUser(CreateUserMessage msg)

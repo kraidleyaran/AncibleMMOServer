@@ -180,6 +180,14 @@ namespace AncibleCoreCommon
                     return JsonConvert.DeserializeObject<ClientJoinedChannelsMessage>(json, settings);
                 case ClientShowDialogueMessage.ID:
                     return JsonConvert.DeserializeObject<ClientShowDialogueMessage>(json, settings);
+                case ClientClaimKeyRequestMessage.ID:
+                    return JsonConvert.DeserializeObject<ClientClaimKeyRequestMessage>(json, settings);
+                case ClientClaimKeyResultMessage.ID:
+                    return JsonConvert.DeserializeObject<ClientClaimKeyResultMessage>(json, settings);
+                case ClientLeaveWorldResultMessage.ID:
+                    return JsonConvert.DeserializeObject<ClientLeaveWorldResultMessage>(json, settings);
+                case ClientLeaveWorldRequestMessage.ID:
+                    return JsonConvert.DeserializeObject<ClientLeaveWorldRequestMessage>(json, settings);
                 default:
                     return original;
             }

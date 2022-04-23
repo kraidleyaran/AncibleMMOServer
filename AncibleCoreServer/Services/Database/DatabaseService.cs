@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using AncibleCoreServer.Data;
@@ -52,6 +53,11 @@ namespace AncibleCoreServer.Services.Database
         {
             _instance._characterNames.Add(name);
             _instance._mainDatabase.GetCollection<WorldCharacterName>(WorldCharacterName.TABLE).Insert(new WorldCharacterName{Name = name});
+        }
+
+        public static bool DoesUsernameExist(string username)
+        {
+            return _instance._mainDatabase.GetCollection<WorldUser>(WorldUser.TABLE).Count(u => string.Equals(u.Username, username, StringComparison.CurrentCultureIgnoreCase)) > 0;
         }
 
         public static LiteDatabase OpenDatabase(string path)

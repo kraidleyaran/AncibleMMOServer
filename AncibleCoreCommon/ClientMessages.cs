@@ -532,5 +532,45 @@ namespace AncibleCoreCommon
         public override int NetworkMessageId => ID;
     }
 
+    [JsonObject(MemberSerialization.OptOut)]
+    [Serializable]
+    public class ClientClaimKeyRequestMessage : ClientMessage
+    {
+        public const int ID = 53;
+        public string GameKey { get; set; }
+        public byte[] Login { get; set; }
+        public byte[] Key { get; set; }
+        public byte[] Iv { get; set; }
+        public override int NetworkMessageId => ID;
+    }
+
+    [JsonObject(MemberSerialization.OptOut)]
+    [Serializable]
+    public class ClientClaimKeyResultMessage : ClientMessage
+    {
+        public const int ID = 54;
+        public bool Success { get; set; }
+        public string Message { get; set; }
+        public override int NetworkMessageId => ID;
+    }
+
+    [JsonObject(MemberSerialization.OptOut)]
+    [Serializable]
+    public class ClientLeaveWorldRequestMessage : ClientMessage
+    {
+        public const int ID = 55;
+        public override int NetworkMessageId => ID;
+    }
+
+    [JsonObject(MemberSerialization.OptOut)]
+    [Serializable]
+    public class ClientLeaveWorldResultMessage : ClientMessage
+    {
+        public const int ID = 56;
+        public bool Success { get; set; }
+        public string Message { get; set; }
+        public override int NetworkMessageId => ID;
+    }
+
     //TODO: Don't forget to add the message to the factory method in AncibleUtils
 }

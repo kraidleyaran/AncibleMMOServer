@@ -11,5 +11,6 @@ namespace AncibleCoreCommon.CommonData.Maps
         public string[] Traits;
         public bool Visible;
         public bool Blocking;
+        public bool ShowName;
     }
 }

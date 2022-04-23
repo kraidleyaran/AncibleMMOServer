@@ -20,6 +20,7 @@ namespace AncibleCoreServer.Services.ObjectManager
         public MapTile Tile;
         public string Sprite;
         public bool Visible = true;
+        public bool ShowName = true;
         public List<InteractionType> Interactions = new List<InteractionType>();
         public List<string> VisibleList = new List<string>();
 
@@ -43,6 +44,7 @@ namespace AncibleCoreServer.Services.ObjectManager
             _data.Sprite = Sprite;
             _data.Position = Tile.Position;
             _data.Interactions = Interactions.ToArray();
+            _data.ShowName = ShowName;
             _queryClientObjectDataMsg.Data = _data;
             this.SendMessageTo(_queryClientObjectDataMsg, this);
             var statusEffects = new List<ClientStatusEffectData>();

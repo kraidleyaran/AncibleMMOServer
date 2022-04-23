@@ -10,6 +10,7 @@ namespace AncibleCoreCommon.CommonData.Client
         public string Subtitle;
         public string ObjectId;
         public string Sprite;
+        public bool ShowName;
         public Vector2IntData Position;
         public CombatAlignment Alignment;
         public int Health;

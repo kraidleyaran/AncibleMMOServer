@@ -7,7 +7,6 @@ namespace AncibleCoreServer.Services
         public static Random RANDOM => _instance._random;
 
         public override string Name => "Random Number Generator Service";
-
         
 
         private static RNGService _instance = null;
